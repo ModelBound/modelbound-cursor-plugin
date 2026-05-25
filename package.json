@@ -1,0 +1,76 @@
+{
+  "name": "modelbound",
+  "displayName": "ModelBound — Skill Health Lens",
+  "description": "Local trust, safety, token-budget and sync-status checks for Agent Skills (SKILL.md). Works in VS Code, Cursor and Windsurf.",
+  "version": "0.1.0",
+  "publisher": "modelbound",
+  "license": "MIT",
+  "homepage": "https://modelbound.co",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/modelbound/cursor-extension.git"
+  },
+  "bugs": {
+    "url": "https://github.com/modelbound/cursor-extension/issues"
+  },
+  "icon": "media/icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Linters", "Other"],
+  "keywords": ["agent-skills", "skill.md", "cursor", "claude", "modelbound"],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "workspaceContains:**/SKILL.md",
+    "workspaceContains:**/skills/**"
+  ],
+  "contributes": {
+    "commands": [
+      { "command": "modelbound.connect", "title": "ModelBound: Connect" },
+      { "command": "modelbound.signOut", "title": "ModelBound: Sign Out" },
+      { "command": "modelbound.scanWorkspace", "title": "ModelBound: Scan Workspace" },
+      { "command": "modelbound.openInWeb", "title": "ModelBound: Open Skill in ModelBound" }
+    ],
+    "configuration": {
+      "title": "ModelBound",
+      "properties": {
+        "modelbound.apiBaseUrl": {
+          "type": "string",
+          "default": "https://qwqfoyhnhszqqplsavxk.supabase.co/functions/v1",
+          "description": "Base URL for ModelBound edge functions."
+        },
+        "modelbound.webBaseUrl": {
+          "type": "string",
+          "default": "https://modelbound.co",
+          "description": "Base URL for the ModelBound web app (used for deep links and auth)."
+        },
+        "modelbound.telemetry": {
+          "type": "boolean",
+          "default": true,
+          "description": "Send anonymous usage events. Always honors vscode.env.isTelemetryEnabled."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "build": "node esbuild.config.js",
+    "package": "vsce package",
+    "publish:vscode": "vsce publish",
+    "publish:ovsx": "ovsx publish"
+  },
+  "dependencies": {
+    "@modelbound/skill-trust": "^0.1.0",
+    "@modelbound/token-budgets": "^0.1.0",
+    "gray-matter": "^4.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.24.0",
+    "esbuild": "^0.20.0",
+    "ovsx": "^0.9.0",
+    "typescript": "^5.4.0"
+  }
+}
