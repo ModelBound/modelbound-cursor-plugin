@@ -10,9 +10,13 @@ Built and maintained by [ModelBound](https://modelbound.co), the unified knowled
 | --- | --- |
 | **Skill** · `skill-health-lens` | Invoke with `/skill-health-lens` to run the four core checks |
 | **Rule** · `skill-authoring` | Inline authoring standards applied when editing any `SKILL.md` |
-| **Commands** · `/open-in-modelbound`, `/sync-from-modelbound` | Bridge back to your ModelBound project |
+| **Commands** · `/open-in-modelbound`, `/sync-from-modelbound`, `/show-hierarchy` | Bridge back to your ModelBound project |
 | **Hook** · `afterFileEdit` on `SKILL.md` | One-line token-budget hint on save |
 | **MCP server** · `modelbound` | Sync status, AI review, team rule libraries (requires API key) |
+
+### `/show-hierarchy`
+
+Calls the `get_resource_tree` MCP tool to fetch the team's full AI resource hierarchy (platform → top-level dir → files), renders a compact markdown outline, and copies it to your clipboard so you can paste the map into Cursor chat or hand it to a teammate. Optionally pass a platform name (`/show-hierarchy claude-code`) to narrow the tree.
 
 ## Install
 
