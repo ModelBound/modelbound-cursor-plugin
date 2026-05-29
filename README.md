@@ -44,6 +44,10 @@ To unlock sync status, AI review, team rule libraries, and the scheduled re-scan
 
 You can revoke the key any time from [modelbound.co/settings/api-keys](https://modelbound.co/settings/api-keys).
 
+### Live updates across machines (recommended companion)
+
+This plugin runs scans on demand inside Cursor. If you want skills edited on **modelbound.co** (or pushed by a teammate) to land in your workspace **automatically**, install the companion [**ModelBound Cursor extension**](https://marketplace.visualstudio.com/items?itemName=ModelBound.modelbound-cursor-extension) alongside this plugin. The extension subscribes to live updates over Supabase Realtime and pulls changed skills to disk — no need to run `/mb:pull` manually after every cloud edit. The two are designed to coexist: this plugin handles authoring quality, the extension handles bidirectional sync.
+
 ## Telemetry
 
 Anonymous usage events are sent to ModelBound to measure install → activation and feature adoption. Events contain no file contents, no skill bodies, and no personal data — only event names, a random install ID, plugin version, and OS.
