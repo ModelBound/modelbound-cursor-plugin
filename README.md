@@ -1,6 +1,47 @@
 # ModelBound — Cursor plugin
 
-Drop the ModelBound token-optimization and Skill Development Pipeline workflow into Cursor. Ships as a set of `.cursor/commands/*.md` slash commands (Cursor surfaces these in chat) plus a tiny pre-write Git hook that snapshots skill files before Cursor's agent rewrites them.
+Audit Agent Skills (`SKILL.md` files) for trust, token budget, duplicates, and tool-surface risk — without leaving Cursor. Run the Skill Development Pipeline and manage skill versions directly from your editor.
+
+Built and maintained by [ModelBound](https://modelbound.co), the unified knowledge index and MCP tool proxy for AI agents.
+
+## What's in the box
+
+| Component | Purpose |
+| --- | --- |
+| **Skill** · `skill-health-lens` | Invoke with `/skill-health-lens` to run the four core checks |
+| **Rule** · `skill-authoring` | Inline authoring standards applied when editing any `SKILL.md` |
+| **Commands** · `/open-in-modelbound`, `/sync-from-modelbound`, `/show-hierarchy` | Bridge back to your ModelBound project |
+| **Pipeline commands** · `/mb-pipeline`, `/mb-test`, `/mb-versions`, `/mb-restore`, `/mb-diff`, `/mb-health` | Run Test & Optimize and manage skill versions |
+| **Hook** · `beforeFileEdit` + `afterFileEdit` on `SKILL.md` | Pre-edit backup to `.mb-backup/` and one-line token-budget hint on save |
+| **MCP server** · `modelbound` | Sync status, AI review, team rule libraries (requires API key) |
+
+### `/show-hierarchy`
+
+Calls the `get_resource_tree` MCP tool to fetch the team's full AI resource hierarchy (platform → top-level dir → files), renders a compact markdown outline, and copies it to your clipboard so you can paste the map into Cursor chat or hand it to a teammate. Optionally pass a platform name (`/show-hierarchy claude-code`) to narrow the tree.
+
+### `/mb-pipeline <skill-id>`
+
+Runs the full ModelBound Skill Development Pipeline on a skill: tests, benchmarks, and optimization. Pass `--dry-run` to preview stages and estimated token cost without executing.
+
+### `/mb-test [skill-id]`
+
+Run tests for a specific skill, or omit the ID to list the 10 most recent test runs across your team.
+
+### `/mb-versions <skill-id>`
+
+Lists all saved checkpoints for a skill with timestamps, scores, labels, and sizes.
+
+### `/mb-restore <skill-id> <version-id>`
+
+Restores a skill to a previous checkpoint. Writes the result to a `.restored.md` file for review before replacing the original.
+
+### `/mb-diff <skill-id> [from-version] [to-version]`
+
+Shows a diff between two versions. Defaults to comparing the latest checkpoint against the current file.
+
+### `/mb-health`
+
+Checks local `.cursor/` and `.claude/` token counts and fetches remote health scores, budgets, and optimization suggestions from ModelBound.
 
 ## Install
 
