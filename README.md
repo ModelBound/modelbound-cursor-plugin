@@ -1,59 +1,55 @@
-# ModelBound Skill Health Lens — Cursor Plugin
+# ModelBound — Cursor plugin
 
-Audit Agent Skills (`SKILL.md` files) for trust, token budget, duplicates, and tool-surface risk — without leaving Cursor.
-
-Built and maintained by [ModelBound](https://modelbound.co), the unified knowledge index and MCP tool proxy for AI agents.
-
-## What's in the box
-
-| Component | Purpose |
-| --- | --- |
-| **Skill** · `skill-health-lens` | Invoke with `/skill-health-lens` to run the four core checks |
-| **Rule** · `skill-authoring` | Inline authoring standards applied when editing any `SKILL.md` |
-| **Commands** · `/open-in-modelbound`, `/sync-from-modelbound`, `/show-hierarchy` | Bridge back to your ModelBound project |
-| **Hook** · `afterFileEdit` on `SKILL.md` | One-line token-budget hint on save |
-| **MCP server** · `modelbound` | Sync status, AI review, team rule libraries (requires API key) |
-
-### `/show-hierarchy`
-
-Calls the `get_resource_tree` MCP tool to fetch the team's full AI resource hierarchy (platform → top-level dir → files), renders a compact markdown outline, and copies it to your clipboard so you can paste the map into Cursor chat or hand it to a teammate. Optionally pass a platform name (`/show-hierarchy claude-code`) to narrow the tree.
+Drop the ModelBound token-optimization and Skill Development Pipeline workflow into Cursor. Ships as a set of `.cursor/commands/*.md` slash commands (Cursor surfaces these in chat) plus a tiny pre-write Git hook that snapshots skill files before Cursor's agent rewrites them.
 
 ## Install
 
-### From the Cursor Marketplace
-*Pending review — link will appear here once published.*
-
-### Manual install
+Two equivalent ways:
 
 ```bash
-# clone next to your project
-git clone https://github.com/modelbound/cursor-plugin ~/.cursor-plugins/modelbound
+# Recommended: drop the .cursor/ folder + hook into your repo
+npx modelbound-cursor-plugin@latest install
 
-# Cursor → Settings → Plugins → Install from path → choose ~/.cursor-plugins/modelbound
+# Or vendor by hand
+git clone https://github.com/ModelBound/cursor-plugin .modelbound-cursor
+cp -r .modelbound-cursor/.cursor ./
+cp .modelbound-cursor/scripts/pre-skill-write.mjs .modelbound/
 ```
 
-## Connect to ModelBound (optional)
+Then in Cursor chat:
 
-The four core checks (trust, token budget, duplicates, tool surface) run **fully locally** with no account.
+```text
+/mb-optimize ./skills/code-review.md
+/mb-pipeline code-review
+```
 
-To unlock sync status, AI review, team rule libraries, and the scheduled re-scan, connect the plugin to your ModelBound account:
+Requires Node ≥ 20. Auth via `MODELBOUND_API_KEY` env var or run `/mb-login` once.
 
-1. In Cursor, run `> ModelBound: Connect`.
-2. Approve the device code in the browser tab that opens.
-3. The plugin stores the resulting `mb_live_*` key in Cursor's secret store and uses it as the `MODELBOUND_API_KEY` env var for the MCP server defined in `mcp.json`.
+## Slash commands
 
-You can revoke the key any time from [modelbound.co/settings/api-keys](https://modelbound.co/settings/api-keys).
+| Command | What it does |
+|---|---|
+| `/mb-optimize <file\|slug>` | Token optimization. Append `--apply` to save a new version. |
+| `/mb-pipeline <skill>` | Full pipeline (lint → trust → test → benchmark → optimize). |
+| `/mb-test <skill>` | Run the test suite. |
+| `/mb-benchmark <skill> <a> <b>` | Head-to-head benchmark. |
+| `/mb-versions <skill>` | List versions, newest first. |
+| `/mb-restore <skill> <versionId>` | Restore (non-destructive). |
+| `/mb-diff <skill> <from> [to]` | Unified diff between versions. |
+| `/mb-health` | Connectivity + auth check. |
+| `/mb-login` / `/mb-logout` / `/mb-whoami` | Auth shortcuts. |
 
-### Live updates across machines (recommended companion)
+All commands shell out to `@modelbound/cli` so semantics are identical across CLI, MCP, Claude Code, and Cursor.
 
-This plugin runs scans on demand inside Cursor. If you want skills edited on **modelbound.co** (or pushed by a teammate) to land in your workspace **automatically**, install the companion [**ModelBound Cursor extension**](https://marketplace.visualstudio.com/items?itemName=ModelBound.modelbound-cursor-extension) alongside this plugin. The extension subscribes to live updates over Supabase Realtime and pulls changed skills to disk — no need to run `/mb:pull` manually after every cloud edit. The two are designed to coexist: this plugin handles authoring quality, the extension handles bidirectional sync.
+## Pre-skill-write Git hook
 
-## Telemetry
+`scripts/pre-skill-write.mjs` is a `pre-commit` hook (works with Husky, lefthook, or plain `.git/hooks`). For every staged skill file (`**/skills/**`, `**/.cursor/skills/**`, `**/SKILL.md`, `**/.agents/skills/**`), it:
 
-Anonymous usage events are sent to ModelBound to measure install → activation and feature adoption. Events contain no file contents, no skill bodies, and no personal data — only event names, a random install ID, plugin version, and OS.
+1. Snapshots the previous committed version to `.modelbound/backups/<sha>-<basename>`.
+2. Refuses the commit if the file would become empty or lose its YAML frontmatter without a `--no-verify`.
 
-To opt out, set the environment variable `MODELBOUND_TELEMETRY=off` in your shell profile.
+This catches the most common skill-file regressions before they land in Git. Opt out per-commit with `MODELBOUND_SKIP_HOOK=1`.
 
 ## License
 
-MIT © ModelBound
+MIT
