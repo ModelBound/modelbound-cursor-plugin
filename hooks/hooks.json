@@ -1,5 +1,11 @@
 {
   "hooks": {
+    "beforeFileEdit": [
+      {
+        "command": "./scripts/backup-skill.sh",
+        "matcher": "SKILL\\.md$"
+      }
+    ],
     "afterFileEdit": [
       {
         "command": "./scripts/touch-skill.sh",
