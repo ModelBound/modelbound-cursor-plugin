@@ -1,11 +1,9 @@
----
-name: mb-restore
-description: Restore a skill to a previous checkpoint version. Writes the restored content to a `.restored.md` file next to the original.
----
+# /mb-restore
+Restore a skill to a prior checkpoint (non-destructive). Usage: `/mb-restore <skill> <version>`.
 
-# Restore Skill Version
+Execute:
+```bash
+npx -y @modelbound/cli version restore --skill "<skill>" --version "<version>"
+```
 
-1. Parse arguments as `<skill-id> <version-id>`.
-2. Call `skill.diff` with `{ skillId, versionA: versionId, action: "restore", source: "cursor-plugin" }`.
-3. Write the returned content to `<skill-name>.restored.md` in the same directory as the active file.
-4. Confirm restoration with the output path.
+Confirm the new version label and remind the user to review before replacing the local file.

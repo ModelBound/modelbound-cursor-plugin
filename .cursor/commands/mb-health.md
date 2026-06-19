@@ -1,4 +1,9 @@
 # /mb-health
-Check ModelBound API connectivity, auth, and rate limits.
+Check ModelBound MCP connectivity and auth.
 
-Execute: `npx -y @modelbound/cli health`
+Execute:
+```bash
+npx -y @modelbound/cli health
+```
+
+Report MCP reachability and signed-in user/team from `auth status`.

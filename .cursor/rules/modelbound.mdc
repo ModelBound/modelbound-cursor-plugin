@@ -1,17 +1,17 @@
 ---
 description: ModelBound conventions — token-aware skill authoring + Skill Development Pipeline.
 alwaysApply: false
-globs: ["**/skills/**", "**/.cursor/skills/**", "**/SKILL.md", "**/.agents/skills/**"]
+globs: [".modelbound/**", ".kiro/skills/**", ".cursor/rules/**", ".claude/**", "**/skills/**", "**/.cursor/skills/**", "**/SKILL.md", "**/.agents/skills/**"]
 ---
 
 # ModelBound skill authoring
 
-When editing files in `skills/`, `.cursor/skills/`, `.agents/skills/`, or any `SKILL.md`:
+When editing skill files (`.modelbound/`, `.kiro/skills/`, `.cursor/rules/`, `.claude/`, `.agents/skills/**/SKILL.md`, or legacy `skills/` paths):
 
 1. **Preserve YAML frontmatter.** Never silently drop, rename, or blank the `name`, `description`, `version`, `model`, or `tags` keys.
 2. **Token-conscious edits.** Prefer surgical edits over full rewrites. If a rewrite is necessary, propose running `/mb-optimize` afterward.
-3. **Verify before commit.** After non-trivial edits, suggest `/mb-pipeline <skill>` so the user sees lint/trust/test/benchmark/optimize output before pushing.
-4. **Never invent versions.** Use `/mb-versions <skill>` to look up real IDs before referencing them in commits or PRs.
+3. **Trust before pipeline.** After substantive edits, suggest `/mb-findings <file>` then `/mb-pipeline <file> --stage test_optimize`.
+4. **Never invent versions or UUIDs.** Use file paths or slugs with `/mb-versions <file>` — the CLI resolves UUIDs via sync.
 5. **Restore is non-destructive.** Restoring an old version creates a new version on top of history; reassure the user nothing is lost.
 
-When the user pastes a skill file into chat without a slug, ask whether they want a local diff (`/mb-optimize ./path`) or a cloud-tracked one (`/mb-optimize <slug>`).
+When the user pastes a skill file into chat without a path, ask whether they want a local diff (`/mb-optimize ./path`) or a cloud-tracked one (`/mb-sync ./path` then `/mb-findings ./path`).

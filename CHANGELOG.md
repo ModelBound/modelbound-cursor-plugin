@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.3.0 — 2026-06-19
+
+### Changed
+- **Aligned all slash commands with `@modelbound/cli` v0.2.0** (extension v1.9.16 parity)
+- Commands use `--skill <file|slug>` — no UUID required; CLI resolves via sync + workspace context
+- Auth commands use `auth login|logout|status` (aliases: `login`, `logout`, `whoami`)
+- Benchmark is latency suite (`benchmark --skill`), not head-to-head version compare
+- Pipeline uses `pipeline run --skill ... --stage test_optimize|production|full --watch`
+- **Skill path detection** expanded in pre-commit hook, edit hooks, and authoring rule globs (`.modelbound/`, `.kiro/skills/`, `.cursor/rules/`, `.claude/`)
+
+### Added
+- `/mb-findings` — Trust & Safety scores + findings list/ignore workflow
+- `/mb-suggest` — suggest skill improvements
+- `/mb-compare` — compare skill versions (`latest` vs `current` default)
+- `/mb-sync` — sync local skill file to repo-linked UUID
+- `/mb-context` — set workspace scoping (`context set`)
+- `.cursor/rules/skill-authoring.mdc` — installed with expanded globs
+
+### Notes
+- Known hosted-backend blockers (pipeline JWT, status column, findings team_id, benchmark auth) documented in command prompts — same as Cursor extension
+
 ## 0.2.0 — 2026-06-13
 
 ### Added

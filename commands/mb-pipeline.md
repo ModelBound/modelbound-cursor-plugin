@@ -1,16 +1,15 @@
----
-name: mb-pipeline
-description: Run the ModelBound Skill Development Pipeline (test → benchmark → optimize) on a skill. Pass a skill ID or the current SKILL.md file path.
----
+# /mb-pipeline
+Run the Skill Development Pipeline. Usage: `/mb-pipeline <skill-file|slug> [--stage full|test_optimize|production]`.
 
-# Run Skill Development Pipeline
+Parse the first token as the skill target (file path preferred — no UUID needed). Remaining flags pass through.
 
-1. Resolve the skill identifier:
-   - If an argument is provided and it ends with `SKILL.md`, extract the directory basename as the skill ID.
-   - Otherwise use the provided argument directly as the skill ID.
-2. Call the ModelBound MCP tool `pipeline.run` with `{ skillId, source: "cursor-plugin" }`.
-3. Render the pipeline result:
-   - Show each stage name, status (✓ passed / ✗ failed / ○ skipped), and duration.
-   - If a score is returned, display it as `Score: X/100`.
-   - If an optimized skill ID is returned, display it as `Optimized skill: <id>`.
-4. If the user passed `--dry-run`, call `pipeline.config` instead and show the preview stages + estimated token cost.
+Execute:
+```bash
+npx -y @modelbound/cli pipeline run --skill "<skill>" $REST --watch
+```
+
+Pre-flight (automatic): workspace context → sync file → repo-linked UUID → pipeline run.
+
+Summarize each stage from `stage_results` (edit, test, production). On failure, run `findings list` and propose fixes.
+
+Known backend blockers may affect pipeline until Lovable deploys `_actor` and `version_before/version_after` fixes — surface errors verbatim.

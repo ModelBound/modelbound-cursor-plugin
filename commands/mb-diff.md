@@ -1,15 +1,11 @@
----
-name: mb-diff
-description: Show diff between two skill versions. Defaults to latest vs current if no versions are specified.
----
+# /mb-diff
+Unified diff between two skill versions. Usage: `/mb-diff <skill> <from> [to]`.
 
-# Diff Skill Versions
+Default `to` is the live/current version.
 
-1. Parse arguments as `<skill-id> [from-version] [to-version]`.
-2. Call `skill.diff` with:
-   - `versionA` = from-version or `"latest"`
-   - `versionB` = to-version or `"current"`
-   - `source: "cursor-plugin"`
-3. Render:
-   - Header showing `from → to` with addition/deletion counts.
-   - The diff text in a code block.
+Execute:
+```bash
+npx -y @modelbound/cli version diff --skill "<skill>" --from "<from>" ${to:+--to "$to"}
+```
+
+Show the diff in a readable block.

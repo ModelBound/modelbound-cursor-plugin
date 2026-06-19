@@ -1,95 +1,78 @@
 # ModelBound — Cursor plugin
 
-Audit Agent Skills (`SKILL.md` files) for trust, token budget, duplicates, and tool-surface risk — without leaving Cursor. Run the Skill Development Pipeline and manage skill versions directly from your editor.
+Audit Agent Skills for trust, token budget, duplicates, and tool-surface risk — without leaving Cursor. Run the Skill Development Pipeline, Trust & Safety findings, and manage skill versions directly from your editor.
 
 Built and maintained by [ModelBound](https://modelbound.co), the unified knowledge index and MCP tool proxy for AI agents.
+
+All slash commands shell out to [`@modelbound/cli`](https://www.npmjs.com/package/modelbound) — same semantics as the Cursor extension, MCP, and Claude Code plugin. **You never need skill UUIDs**: pass a file path or slug and the CLI syncs + resolves internally.
 
 ## What's in the box
 
 | Component | Purpose |
 | --- | --- |
 | **Skill** · `skill-health-lens` | Invoke with `/skill-health-lens` to run the four core checks |
-| **Rule** · `skill-authoring` | Inline authoring standards applied when editing any `SKILL.md` |
-| **Commands** · `/open-in-modelbound`, `/sync-from-modelbound`, `/show-hierarchy` | Bridge back to your ModelBound project |
-| **Pipeline commands** · `/mb-pipeline`, `/mb-test`, `/mb-versions`, `/mb-restore`, `/mb-diff`, `/mb-health` | Run Test & Optimize and manage skill versions |
-| **Hook** · `beforeFileEdit` + `afterFileEdit` on `SKILL.md` | Pre-edit backup to `.mb-backup/` and one-line token-budget hint on save |
-| **MCP server** · `modelbound` | Sync status, AI review, team rule libraries (requires API key) |
+| **Rule** · `skill-authoring` | Inline authoring standards on all watched skill paths |
+| **Trust & Optimize** · `/mb-findings`, `/mb-suggest`, `/mb-compare`, `/mb-benchmark` | Test & Optimize phase (extension v1.9.16 parity) |
+| **Pipeline** · `/mb-pipeline`, `/mb-test`, `/mb-sync`, `/mb-context` | Skill Development Pipeline with auto sync |
+| **Versions** · `/mb-versions`, `/mb-restore`, `/mb-diff` | Checkpoint history and restore |
+| **Auth** · `/mb-login`, `/mb-logout`, `/mb-whoami`, `/mb-health` | Device login + MCP connectivity |
+| **Hook** · `beforeFileEdit` + `afterFileEdit` on skill files | Pre-edit backup to `.mb-backup/` and token-budget hint on save |
+| **MCP server** · `modelbound` | Hosted at `https://mcp.modelbound.co` (requires `MODELBOUND_API_KEY`) |
 
-### `/show-hierarchy`
+### Test & Optimize workflow (Brian's case)
 
-Calls the `get_resource_tree` MCP tool to fetch the team's full AI resource hierarchy (platform → top-level dir → files), renders a compact markdown outline, and copies it to your clipboard so you can paste the map into Cursor chat or hand it to a teammate. Optionally pass a platform name (`/show-hierarchy claude-code`) to narrow the tree.
+```bash
+/mb-context set --repo org/repo
+/mb-sync .modelbound/prompt-pr-contributor.md
+/mb-findings .modelbound/prompt-pr-contributor.md
+/mb-findings ignore ... --key "escalation:critical:..."
+/mb-pipeline .modelbound/prompt-pr-contributor.md --stage test_optimize
+```
 
-### `/mb-pipeline <skill-id>`
+### Skill file paths (auto-detected)
 
-Runs the full ModelBound Skill Development Pipeline on a skill: tests, benchmarks, and optimization. Pass `--dry-run` to preview stages and estimated token cost without executing.
-
-### `/mb-test [skill-id]`
-
-Run tests for a specific skill, or omit the ID to list the 10 most recent test runs across your team.
-
-### `/mb-versions <skill-id>`
-
-Lists all saved checkpoints for a skill with timestamps, scores, labels, and sizes.
-
-### `/mb-restore <skill-id> <version-id>`
-
-Restores a skill to a previous checkpoint. Writes the result to a `.restored.md` file for review before replacing the original.
-
-### `/mb-diff <skill-id> [from-version] [to-version]`
-
-Shows a diff between two versions. Defaults to comparing the latest checkpoint against the current file.
-
-### `/mb-health`
-
-Checks local `.cursor/` and `.claude/` token counts and fetches remote health scores, budgets, and optimization suggestions from ModelBound.
+- `.modelbound/**/*.md|.json`
+- `.kiro/skills/**/*.md`
+- `.cursor/rules/**/*.md|.mdc`
+- `.claude/**/*.md`
+- `.agents/skills/**/SKILL.md`
 
 ## Install
 
-Two equivalent ways:
-
 ```bash
-# Recommended: drop the .cursor/ folder + hook into your repo
 npx modelbound-cursor-plugin@latest install
-
-# Or vendor by hand
-git clone https://github.com/ModelBound/cursor-plugin .modelbound-cursor
-cp -r .modelbound-cursor/.cursor ./
-cp .modelbound-cursor/scripts/pre-skill-write.mjs .modelbound/
 ```
 
-Then in Cursor chat:
-
-```text
-/mb-optimize ./skills/code-review.md
-/mb-pipeline code-review
-```
-
-Requires Node ≥ 20. Auth via `MODELBOUND_API_KEY` env var or run `/mb-login` once.
+Requires Node ≥ 20. Auth via `MODELBOUND_API_KEY` or run `/mb-login` once.
 
 ## Slash commands
 
-| Command | What it does |
+| Command | CLI equivalent |
 |---|---|
-| `/mb-optimize <file\|slug>` | Token optimization. Append `--apply` to save a new version. |
-| `/mb-pipeline <skill>` | Full pipeline (lint → trust → test → benchmark → optimize). |
-| `/mb-test <skill>` | Run the test suite. |
-| `/mb-benchmark <skill> <a> <b>` | Head-to-head benchmark. |
-| `/mb-versions <skill>` | List versions, newest first. |
-| `/mb-restore <skill> <versionId>` | Restore (non-destructive). |
-| `/mb-diff <skill> <from> [to]` | Unified diff between versions. |
-| `/mb-health` | Connectivity + auth check. |
-| `/mb-login` / `/mb-logout` / `/mb-whoami` | Auth shortcuts. |
+| `/mb-findings <skill>` | `findings list --skill …` |
+| `/mb-suggest <skill>` | `suggest --skill …` |
+| `/mb-compare <skill>` | `compare --skill … --from latest --to current` |
+| `/mb-benchmark <skill>` | `benchmark --skill …` |
+| `/mb-pipeline <skill>` | `pipeline run --skill … --watch` |
+| `/mb-test <skill>` | `test --skill …` |
+| `/mb-sync <file>` | `sync --file …` |
+| `/mb-context set` | `context set [--repo org/repo]` |
+| `/mb-optimize <file\|slug>` | `optimize …` |
+| `/mb-versions <skill>` | `versions --skill …` |
+| `/mb-restore <skill> <ver>` | `version restore --skill … --version …` |
+| `/mb-diff <skill> <from> [to]` | `version diff --skill …` |
+| `/mb-health` | `health` |
+| `/mb-login` / `/mb-logout` / `/mb-whoami` | `auth login` / `auth logout` / `auth status` |
 
-All commands shell out to `@modelbound/cli` so semantics are identical across CLI, MCP, Claude Code, and Cursor.
+## Known backend blockers
+
+Pipeline, findings ignore, benchmark, compare, and suggest may hit hosted-backend bugs until Lovable deploys fixes. The CLI surfaces these errors explicitly (`Pipeline failed:`, `[MCP_ERROR]`, etc.). See `docs/BACKEND-BLOCKERS.md` in modelbound-cli.
 
 ## Pre-skill-write Git hook
 
-`scripts/pre-skill-write.mjs` is a `pre-commit` hook (works with Husky, lefthook, or plain `.git/hooks`). For every staged skill file (`**/skills/**`, `**/.cursor/skills/**`, `**/SKILL.md`, `**/.agents/skills/**`), it:
+`scripts/pre-skill-write.mjs` snapshots staged skill files (same paths as above) to `.modelbound/backups/` before commit and blocks empty files or dropped YAML frontmatter. Opt out with `MODELBOUND_SKIP_HOOK=1` or `--no-verify`.
 
-1. Snapshots the previous committed version to `.modelbound/backups/<sha>-<basename>`.
-2. Refuses the commit if the file would become empty or lose its YAML frontmatter without a `--no-verify`.
-
-This catches the most common skill-file regressions before they land in Git. Opt out per-commit with `MODELBOUND_SKIP_HOOK=1`.
+Edit hooks in `hooks/hooks.json` back up to `.mb-backup/` and print a token-budget hint on save for the same skill paths.
 
 ## License
 

@@ -1,4 +1,9 @@
 # /mb-versions
-List skill versions. Usage: `/mb-versions <skill> [--limit <n>]`.
+List skill version checkpoints. Usage: `/mb-versions <skill-file|slug>`.
 
-Execute: `npx -y @modelbound/cli skill versions $ARGS`
+Execute:
+```bash
+npx -y @modelbound/cli versions --skill "<skill>"
+```
+
+Show version labels, timestamps, and notes newest first.

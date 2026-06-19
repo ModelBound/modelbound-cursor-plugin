@@ -4,12 +4,52 @@
       {
         "command": "./scripts/backup-skill.sh",
         "matcher": "SKILL\\.md$"
+      },
+      {
+        "command": "./scripts/backup-skill.sh",
+        "matcher": "\\.modelbound/[^/]+\\.(md|json)$"
+      },
+      {
+        "command": "./scripts/backup-skill.sh",
+        "matcher": "\\.kiro/skills/[^/]+\\.md$"
+      },
+      {
+        "command": "./scripts/backup-skill.sh",
+        "matcher": "\\.cursor/rules/[^/]+\\.(md|mdc)$"
+      },
+      {
+        "command": "./scripts/backup-skill.sh",
+        "matcher": "\\.claude/[^/]+\\.md$"
+      },
+      {
+        "command": "./scripts/backup-skill.sh",
+        "matcher": "(^|/)(skills|\\.cursor/skills|\\.agents/skills)/"
       }
     ],
     "afterFileEdit": [
       {
         "command": "./scripts/touch-skill.sh",
         "matcher": "SKILL\\.md$"
+      },
+      {
+        "command": "./scripts/touch-skill.sh",
+        "matcher": "\\.modelbound/[^/]+\\.(md|json)$"
+      },
+      {
+        "command": "./scripts/touch-skill.sh",
+        "matcher": "\\.kiro/skills/[^/]+\\.md$"
+      },
+      {
+        "command": "./scripts/touch-skill.sh",
+        "matcher": "\\.cursor/rules/[^/]+\\.(md|mdc)$"
+      },
+      {
+        "command": "./scripts/touch-skill.sh",
+        "matcher": "\\.claude/[^/]+\\.md$"
+      },
+      {
+        "command": "./scripts/touch-skill.sh",
+        "matcher": "(^|/)(skills|\\.cursor/skills|\\.agents/skills)/"
       }
     ]
   }
