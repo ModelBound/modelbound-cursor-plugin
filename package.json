@@ -1,6 +1,6 @@
 {
   "name": "modelbound-cursor-plugin",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "ModelBound for Cursor — slash commands for Trust & Safety findings, Skill Development Pipeline, test, benchmark, compare, suggest, versions, restore, diff. Includes pre-skill-write Git hook to snapshot skill files.",
   "license": "MIT",
   "repository": "https://github.com/ModelBound/cursor-plugin",
