@@ -6,8 +6,8 @@
 // pre-commit hook into either Husky (if present) or `.git/hooks/pre-commit`.
 //
 // Idempotent: re-running is safe — overwrites only files this package owns
-// (the .cursor/commands/mb-*.md set, the .cursor/rules/modelbound.mdc rule,
-// and .modelbound/pre-skill-write.mjs).
+// (the .cursor/commands/mb-*.md set, the .cursor/rules/*.mdc rules,
+// and .modelbound/pre-skill-write.mjs + .modelbound/mb.mjs).
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";

@@ -9,7 +9,7 @@ node .modelbound/mb.mjs findings list --skill "<skill-file>"
 # If user wants to dismiss a false positive:
 node .modelbound/mb.mjs findings ignore --skill "<skill-file>" --key "<stable-key>"
 node .modelbound/mb.mjs benchmark --skill "<skill-file>"
-node .modelbound/mb.mjs compare --skill "<skill-file>"
+node .modelbound/mb.mjs compare --skill "<skill-file>" --from latest --to current
 node .modelbound/mb.mjs suggest --skill "<skill-file>"
 node .modelbound/mb.mjs pipeline run --skill "<skill-file>" --stage test_optimize --watch
 ```
