@@ -14,6 +14,19 @@
     "type": "git",
     "url": "https://github.com/modelbound/cursor-plugin"
   },
-  "keywords": ["modelbound", "agent-skills", "skill-md", "trust", "token-budget", "audit", "rag", "mcp", "pipeline", "versions"],
+  "keywords": [
+    "modelbound",
+    "cursor",
+    "agent-skills",
+    "context-engineering",
+    "prompt-engineering",
+    "mcp",
+    "model-context-protocol",
+    "skill-pipeline",
+    "token-optimization",
+    "trust",
+    "ai-agents",
+    "vscode"
+  ],
   "logo": "assets/logo.svg"
 }

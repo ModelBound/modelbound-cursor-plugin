@@ -1,10 +1,24 @@
 {
   "name": "modelbound-cursor-plugin",
   "version": "0.3.2",
-  "description": "ModelBound for Cursor — slash commands for Trust & Safety findings, Skill Development Pipeline, test, benchmark, compare, suggest, versions, restore, diff. Includes pre-skill-write Git hook to snapshot skill files.",
+  "description": "Official ModelBound plugin for Cursor — slash commands for skill pipeline, trust & safety, versions, and MCP-backed context sync.",
   "license": "MIT",
   "repository": "https://github.com/ModelBound/cursor-plugin",
-  "homepage": "https://modelbound.co/open-source",
+  "homepage": "https://modelbound.co/connect",
+  "keywords": [
+    "modelbound",
+    "cursor",
+    "cursor-plugin",
+    "agent-skills",
+    "context-engineering",
+    "prompt-engineering",
+    "mcp",
+    "model-context-protocol",
+    "skill-pipeline",
+    "token-optimization",
+    "ai-agents",
+    "vscode"
+  ],
   "bin": {
     "modelbound-cursor-install": "./scripts/install.mjs"
   },
@@ -13,5 +27,5 @@
     "hook": "node scripts/pre-skill-write.mjs"
   },
   "engines": { "node": ">=20" },
-  "files": [".cursor", "scripts", "README.md", "LICENSE"],
+  "files": [".cursor", "scripts", "README.md", "LICENSE"]
 }

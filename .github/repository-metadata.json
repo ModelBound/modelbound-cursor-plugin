@@ -1,0 +1,24 @@
+{
+  "description": "Official ModelBound plugin for Cursor — slash commands for skill pipeline, trust & safety, versions, and MCP-backed context sync.",
+  "homepage": "https://modelbound.co/connect",
+  "topics": [
+    "ai",
+    "ai-agents",
+    "ai-tools",
+    "agent-skills",
+    "context-engineering",
+    "prompt-engineering",
+    "prompts",
+    "llm",
+    "generative-ai",
+    "artificial-intelligence",
+    "cursor",
+    "mcp",
+    "model-context-protocol",
+    "plugin",
+    "vscode",
+    "token-optimization",
+    "agentic-workflow",
+    "skills"
+  ]
+}
