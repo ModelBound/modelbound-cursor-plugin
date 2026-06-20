@@ -74,6 +74,18 @@ Pipeline, findings ignore, benchmark, compare, and suggest may hit hosted-backen
 
 Edit hooks in `hooks/hooks.json` back up to `.mb-backup/` and print a token-budget hint on save for the same skill paths.
 
+## Related projects
+
+| Project | Description |
+| --- | --- |
+| [ModelBound CLI](https://github.com/ModelBound/modelbound-cli) · [npm](https://www.npmjs.com/package/modelbound) | Terminal + CI for token optimization, skill pipeline, and version management |
+| [ModelBound MCP Server](https://github.com/ModelBound/modelbound-mcp-server) · [npm](https://www.npmjs.com/package/modelbound-mcp) | Local-first MCP server for skill lint, convert, and cloud sync |
+| [Cursor Extension](https://github.com/ModelBound/modelbound-cursor-extension) · [Marketplace](https://marketplace.visualstudio.com/items?itemName=ModelBound.modelbound-cursor-extension) | VS Code/Cursor extension for rules sync and MCP bridge |
+| [Claude Code Plugin](https://github.com/ModelBound/modelbound-claude-code-plugin) | Claude Code plugin for pipeline, hooks, and skill sync |
+| [Dev Packs](https://github.com/ModelBound/dev-packs) | Open-source curated AI context packs for engineering teams |
+
+Install hub: [modelbound.co/connect](https://modelbound.co/connect)
+
 ## License
 
 MIT
