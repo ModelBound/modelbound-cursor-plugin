@@ -5,6 +5,9 @@
   "license": "MIT",
   "repository": "https://github.com/ModelBound/cursor-plugin",
   "homepage": "https://modelbound.co/connect",
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "modelbound",
     "cursor",
