@@ -4,7 +4,7 @@
  *
  * Resolution order:
  *   1. `modelbound` on PATH (global/local install)
- *   2. `npx -y modelbound` (npm package, when published)
+ *   2. `npx -y modelbound@latest` (https://www.npmjs.com/package/modelbound)
  *   3. `npx -y github:ModelBound/modelbound-cli` (source fallback)
  *
  * Loads MODELBOUND_API_KEY from (first hit):

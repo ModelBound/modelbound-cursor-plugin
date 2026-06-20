@@ -4,7 +4,7 @@ Audit Agent Skills for trust, token budget, duplicates, and tool-surface risk â€
 
 Built and maintained by [ModelBound](https://modelbound.co), the unified knowledge index and MCP tool proxy for AI agents.
 
-All slash commands shell out to the ModelBound CLI via `node .modelbound/mb.mjs` (installed by this plugin). The launcher uses a global `modelbound` binary if present, otherwise `npx github:ModelBound/modelbound-cli`. Same semantics as the Cursor extension and MCP. **You never need skill UUIDs**: pass a file path or slug and the CLI syncs + resolves internally.
+All slash commands shell out to the ModelBound CLI via `node .modelbound/mb.mjs` (installed by this plugin). The launcher uses a global `modelbound` binary if present, otherwise [`npx modelbound`](https://www.npmjs.com/package/modelbound) from npm. Same semantics as the Cursor extension and MCP. **You never need skill UUIDs**: pass a file path or slug and the CLI syncs + resolves internally.
 
 ## What's in the box
 
