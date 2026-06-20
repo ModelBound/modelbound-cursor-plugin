@@ -1,9 +1,11 @@
 # /mb-compare
-Compare two skill versions. Usage: `/mb-compare <skill> [--from latest] [--to current]`.
+Compare two skill versions. Usage: `/mb-compare <skill> [--from 0.1.31] [--to 0.1.32]`.
+
+**Version labels:** use numeric semver **without** a `v` prefix (`0.1.31`, not `v0.1.31`). Defaults `latest` / `current` may fail if body snapshots were not stored for those labels — use explicit versions from `/mb-versions`.
 
 Execute:
 ```bash
-npx -y @modelbound/cli compare --skill "<skill>" --from latest --to current
+node .modelbound/mb.mjs compare --skill "<skill>" --from "<from>" --to "<to>"
 ```
 
-Pass through any `--from` / `--to` flags from the user. Summarize differences.
+Summarize the `diff` field and `stats` (added/removed lines).

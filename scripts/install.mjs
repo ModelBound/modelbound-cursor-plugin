@@ -29,10 +29,11 @@ function copyDir(src, dst) {
 // 1. Commands + rule
 copyDir(path.join(pkgRoot, ".cursor"), path.join(target, ".cursor"));
 
-// 2. Hook script
+// 2. Hook script + CLI launcher
 const hookDst = path.join(target, ".modelbound", "pre-skill-write.mjs");
 fs.mkdirSync(path.dirname(hookDst), { recursive: true });
 fs.copyFileSync(path.join(pkgRoot, "scripts", "pre-skill-write.mjs"), hookDst);
+fs.copyFileSync(path.join(pkgRoot, "scripts", "mb.mjs"), path.join(target, ".modelbound", "mb.mjs"));
 
 // 3. Wire pre-commit
 const huskyDir = path.join(target, ".husky");

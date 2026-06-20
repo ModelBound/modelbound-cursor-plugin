@@ -3,7 +3,7 @@ Run the skill test suite. Usage: `/mb-test <skill-file|slug> [--case <id>] [--pr
 
 Execute:
 ```bash
-npx -y @modelbound/cli test --skill "<skill>" $REST
+node .modelbound/mb.mjs test --skill "<skill>" $REST
 ```
 
 Summarize pass/fail, adherence score, and latency.

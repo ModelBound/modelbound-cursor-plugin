@@ -5,7 +5,7 @@ Parse the first token as the skill target (file path preferred — no UUID neede
 
 Execute:
 ```bash
-npx -y @modelbound/cli pipeline run --skill "<skill>" $REST --watch
+node .modelbound/mb.mjs pipeline run --skill "<skill>" $REST --watch
 ```
 
 Pre-flight (automatic): workspace context → sync file → repo-linked UUID → pipeline run.

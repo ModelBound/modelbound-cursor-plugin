@@ -3,5 +3,5 @@ Show the currently authenticated ModelBound user.
 
 Execute:
 ```bash
-npx -y @modelbound/cli auth status
+node .modelbound/mb.mjs auth status
 ```

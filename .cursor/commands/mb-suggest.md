@@ -3,7 +3,7 @@ Suggest skill improvements from trust & quality analysis. Usage: `/mb-suggest <s
 
 Execute:
 ```bash
-npx -y @modelbound/cli suggest --skill "<skill>"
+node .modelbound/mb.mjs suggest --skill "<skill>"
 ```
 
 Summarize actionable recommendations. May return `Unauthorized` until backend `_actor` fix lands.
