@@ -28,6 +28,7 @@
   "scripts": {
     "install-plugin": "node scripts/install.mjs",
     "hook": "node scripts/pre-skill-write.mjs",
+    "test": "node scripts/validate-plugin.mjs",
     "prepublishOnly": "node -e \"require('fs').accessSync('.cursor-plugin/plugin.json')\""
   },
   "engines": { "node": ">=20" },
