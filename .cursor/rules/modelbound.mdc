@@ -22,3 +22,14 @@ When a task that used a ModelBound skill finishes, report the outcome with
 `/mb-report <slug> <worked|partial|failed>`. If the skill was ignored, out of
 scope, used the wrong tool, invented something, produced the wrong format, or
 was too vague, pass that as the category. This is the only way skills improve.
+
+## Before an unattended run
+
+If a task will not be reviewed step by step, run `/mb-harness <slug>` first. If
+the harness reports a failing gate, treat the skill as supervised only: stop and
+ask before any write, deploy, spend or shell action.
+
+## After a multi-step task that used a ModelBound skill
+
+Offer to run `/mb-trace <slug>` so the run shows up under Live runs. Never
+send prompts, file contents or output, only step names and outcomes.
