@@ -4,7 +4,7 @@
  *
  * Resolution order:
  *   1. `modelbound` on PATH (global/local install)
- *   2. `npx -y modelbound@latest` (https://www.npmjs.com/package/modelbound)
+ *   2. `npx -y modelbound@0.3.6` (https://www.npmjs.com/package/modelbound)
  *   3. `npx -y github:ModelBound/modelbound-cli` (source fallback)
  *
  * Loads MODELBOUND_API_KEY from (first hit):
@@ -51,7 +51,8 @@ let result = run("modelbound", args);
 if (!result.error) process.exit(result.status ?? 0);
 
 if (result.error?.code === "ENOENT") {
-  result = run("npx", ["-y", "modelbound@latest", ...args]);
+  const pin = process.env.MODELBOUND_CLI_VERSION || "0.3.6";
+  result = run("npx", ["-y", `modelbound@${pin}`, ...args]);
   if (!result.error || result.status === 0) process.exit(result.status ?? 0);
 
   result = run("npx", ["-y", "github:ModelBound/modelbound-cli", ...args]);

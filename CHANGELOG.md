@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.4 — 2026-09-27
+
+### Added
+- E2E harness (`npm run test:e2e:full`) — commands, hooks, offline `init`/`new`/`lint`/`validate`/`trust`
+- Slash commands for CLI parity: `/mb-init`, `/mb-new`, `/mb-trust`, `/mb-lint`, `/mb-validate`
+- Pin `mb.mjs` fallback to **modelbound@0.3.6** (harness, trace, report, reliability)
+
+### Notes
+- `/mb-trace` uses MCP `report_run` (Cursor-native); CLI `mb trace` is for shell/CI — see `docs/PARITY.md`
+
 ## 0.3.0 — 2026-06-19
 
 ### Changed
