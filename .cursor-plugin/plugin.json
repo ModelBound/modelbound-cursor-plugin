@@ -1,7 +1,7 @@
 {
   "name": "modelbound-skill-health-lens",
   "displayName": "ModelBound Skill Health Lens",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Audit Agent Skills for trust, token budget, duplicates, and tool-surface risk. Run the Skill Development Pipeline and manage versions without leaving Cursor.",
   "author": {
     "name": "ModelBound",
@@ -12,7 +12,7 @@
   "homepage": "https://modelbound.co",
   "repository": {
     "type": "git",
-    "url": "https://github.com/modelbound/cursor-plugin"
+    "url": "https://github.com/ModelBound/modelbound-cursor-plugin"
   },
   "keywords": [
     "modelbound",

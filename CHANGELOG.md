@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.5 — 2026-09-27
+
+### Fixed
+- `package.json` / plugin metadata repository URL matches GitHub (`modelbound-cursor-plugin`) for npm provenance publish
+
 ## 0.3.4 — 2026-09-27
 
 ### Added
