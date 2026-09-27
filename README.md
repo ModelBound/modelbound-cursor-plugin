@@ -38,8 +38,10 @@ Requires Node ≥ 20. Auth via `MODELBOUND_API_KEY` env var or run `/mb-login` o
 | `/mb-diff <skill> <from> [to]` | Unified diff between versions. |
 | `/mb-health` | Connectivity + auth check. |
 | `/mb-login` / `/mb-logout` / `/mb-whoami` | Auth shortcuts. |
+| `/mb-init`, `/mb-new`, `/mb-lint`, `/mb-validate`, `/mb-trust` | Local anti-slop scaffold + checks (see [docs/PARITY.md](docs/PARITY.md)). |
+| `/mb-report`, `/mb-reliability`, `/mb-harness`, `/mb-trace` | Feedback loop, unattended gate, MCP run tracing. |
 
-All commands shell out to `@modelbound/cli` so semantics are identical across CLI, MCP, Claude Code, and Cursor.
+Most commands shell out to the **modelbound** npm CLI via `.modelbound/mb.mjs`. See `.cursor/commands/` for the full list.
 
 ## Pre-skill-write Git hook
 
@@ -49,6 +51,15 @@ All commands shell out to `@modelbound/cli` so semantics are identical across CL
 2. Refuses the commit if the file would become empty or lose its YAML frontmatter without a `--no-verify`.
 
 This catches the most common skill-file regressions before they land in Git. Opt out per-commit with `MODELBOUND_SKIP_HOOK=1`.
+
+## Tests
+
+```bash
+npm test                 # validate plugin layout + mb.mjs smoke
+npm run test:e2e:full    # commands, hooks, offline CLI, optional cloud (MODELBOUND_API_KEY)
+```
+
+CLI vs slash-command coverage: [docs/PARITY.md](docs/PARITY.md).
 
 ## License
 
