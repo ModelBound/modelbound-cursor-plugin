@@ -11,7 +11,7 @@ Two equivalent ways:
 npx modelbound-cursor-plugin@latest install
 
 # Or vendor by hand
-git clone https://github.com/ModelBound/cursor-plugin .modelbound-cursor
+git clone https://github.com/ModelBound/modelbound-cursor-plugin .modelbound-cursor
 cp -r .modelbound-cursor/.cursor ./
 cp .modelbound-cursor/scripts/pre-skill-write.mjs .modelbound/
 ```
