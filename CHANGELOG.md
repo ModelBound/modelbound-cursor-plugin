@@ -1,5 +1,12 @@
 # Changelog
 
+
+## 0.4.0 — 2026-10-11
+
+### Breaking
+- Removed the numeric trust score. `/mb-trust` is now `/mb-checks` (pass / warnings / blocking), pinned to CLI 0.4.0.
+- Skill Health Lens reports check status instead of a 0–100 score; harness presets drop `min_trust` / `enforce_trust`.
+
 ## 0.3.5 — 2026-09-27
 
 ### Fixed

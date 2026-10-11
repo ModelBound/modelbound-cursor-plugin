@@ -7,7 +7,7 @@ node .modelbound/mb.mjs pipeline config --skill "<skill>"
 
 To update gates:
 ```bash
-node .modelbound/mb.mjs pipeline config --skill "<skill>" --min-trust 60 --enforce-trust
+node .modelbound/mb.mjs pipeline config --skill "<skill>" --max-latency 3000 --enforce-tests
 node .modelbound/mb.mjs pipeline config --skill "<skill>" --max-latency 2500 --enforce-latency
 node .modelbound/mb.mjs pipeline config --skill "<skill>" --no-enforce-tests
 node .modelbound/mb.mjs pipeline config --skill "<skill>" --targets save,marketplace,claude_export

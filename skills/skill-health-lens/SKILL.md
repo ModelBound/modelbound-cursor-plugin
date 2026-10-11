@@ -1,11 +1,11 @@
 ---
 name: skill-health-lens
-description: Audit Agent Skills (SKILL.md files) for trust score, token budget, duplicate content, and risky tool surface. Use when reviewing a SKILL.md, before publishing a skill, or when an agent's skill library starts to feel bloated or untrustworthy. Invoke with "/skill-health-lens" or ask the agent to "lens this skill".
+description: Audit Agent Skills (SKILL.md files) for safety checks, token budget, duplicate content, and risky tool surface. Use when reviewing a SKILL.md, before publishing a skill, or when an agent's skill library starts to feel bloated or untrustworthy. Invoke with "/skill-health-lens" or ask the agent to "lens this skill".
 ---
 
 # Skill Health Lens
 
-Audits Agent Skills against the same checks ModelBound runs in its Skill Development Pipeline — **Trust**, **Token Budget**, **Duplicates**, and **Tool Surface** — without running the full pipeline.
+Audits Agent Skills against the same checks ModelBound runs in its Skill Development Pipeline — **Checks**, **Token Budget**, **Duplicates**, and **Tool Surface** — without running the full pipeline.
 
 ## When to use
 
@@ -18,19 +18,19 @@ Audits Agent Skills against the same checks ModelBound runs in its Skill Develop
 
 For each `SKILL.md` in scope:
 
-### 1. Trust score (target: ≥ 70)
-Score the skill 0–100 using ModelBound's `@modelbound/skill-trust` heuristics:
+### 1. Safety & quality checks
+Check each skill with ModelBound's h5 heuristics and report **pass / warnings / blocking** — never a numeric score:
 
 - **Frontmatter completeness** — `name`, `description`, optional `allowed_tools` present and well-formed
 - **Description quality** — has a clear "when to use" signal, is between 30 and 400 chars, names concrete triggers
 - **Instruction shape** — uses numbered steps or bullets, no walls of prose, no contradictory rules
 - **Determinism** — avoids vague language ("maybe", "consider", "could") in favor of imperatives
-- **Provenance** — links to source docs or examples where claims are made
+- **Safety** — no injection-like phrasing, secret reads, or unscoped destructive commands
 
-Report trust tier:
-- **Green** ≥ 80
-- **Amber** 60–79
-- **Red** < 60
+Status:
+- **✅ Pass** — no open issues
+- **⚠️ Warnings** — quality issues; don't block publishing
+- **⛔ Blocking** — safety issues or failing tests; fix before publishing
 
 ### 2. Token budget
 Estimate tokens (chars / 4) for the skill body and compare against ModelBound's thresholds:
@@ -64,7 +64,7 @@ When the user is signed in to ModelBound (via the `modelbound` MCP server define
 
 - Call `skills.list` (optionally filtered by `category` or `group_id`) and `skills.listGroups` to pull the user's Skills — including a whole group at once when they say things like "lens my Onboarding group" or "audit every Backend skill".
 - Use `skills.get` / `skills.getFile` for the full bundle, and `platform.exportSkillForIde` with `group_id` to bundle every skill in a group into the IDE in one shot.
-- Offer to request an AI review for any skill scoring Red on Trust.
+- Offer to request an AI review for any skill with blocking issues, and show its real-world success rate when ModelBound has run reports.
 - Surface team-level policies (banned tools, required sections) so they're checked alongside the four core checks.
 
 > Note: ModelBound no longer uses the legacy "pack" concept — everything is a **Skill**, optionally organized into a **Skill group**. Older `packs.*` / `export_pack_for_ide` tool names still work as deprecated aliases but new code should use `skills.*` and `platform.exportSkillForIde`.
@@ -77,10 +77,10 @@ If the MCP server is unreachable or the user is not signed in, the four core che
 # Skill Health Lens — <N> skills in <workspace>
 
 ## Summary
-| Skill | Trust | Tokens | Duplicates | Tools |
+| Skill | Checks | Tokens | Duplicates | Tools |
 | --- | --- | --- | --- | --- |
-| code-reviewer | 🟢 86 | 🟢 1.2k | — | ✅ scoped |
-| pr-helper    | 🟡 71 | 🔴 6.8k | clones code-reviewer (0.62) | ⚠️ unrestricted |
+| code-reviewer | ✅ pass | 🟢 1.2k | — | ✅ scoped |
+| pr-helper    | ⚠️ 2 warnings | 🔴 6.8k | clones code-reviewer (0.62) | ⚠️ unrestricted |
 
 ## Top 3 fixes
 1. **pr-helper**: split into `pr-summarize` and `pr-review` (current body is 6.8k tokens).

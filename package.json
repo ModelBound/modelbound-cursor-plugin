@@ -1,7 +1,7 @@
 {
   "name": "modelbound-cursor-plugin",
-  "version": "0.3.5",
-  "description": "Official ModelBound plugin for Cursor — slash commands for skill pipeline, trust & safety, versions, and MCP-backed context sync.",
+  "version": "0.4.0",
+  "description": "Official ModelBound plugin for Cursor — slash commands for skill pipeline, safety checks, versions, and MCP-backed context sync.",
   "license": "MIT",
   "repository": {
     "type": "git",

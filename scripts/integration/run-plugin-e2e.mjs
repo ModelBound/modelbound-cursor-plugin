@@ -17,7 +17,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "../..");
 const CURSOR_CMD = path.join(ROOT, ".cursor", "commands");
 const MB = path.join(ROOT, "scripts", "mb.mjs");
-const CLI_PIN = process.env.PLUGIN_E2E_CLI_VERSION || "0.3.6";
+const CLI_PIN = process.env.PLUGIN_E2E_CLI_VERSION || "0.4.0";
 const skipValidate = process.argv.includes("--skip-validate");
 
 function loadApiKey() {
@@ -123,7 +123,7 @@ function phaseSlashCommands() {
     "mb-health.md",
     "mb-init.md",
     "mb-new.md",
-    "mb-trust.md",
+    "mb-checks.md",
     "mb-lint.md",
     "mb-validate.md",
   ];
@@ -202,7 +202,7 @@ function phaseOfflineMb() {
   if (fs.existsSync(skill)) {
     expectExit("mb.mjs lint", runMb(["lint", skill], fixture), 0);
     expectExit("mb.mjs validate", runMb(["validate", skill], fixture), 0);
-    expectExit("mb.mjs trust", runMb(["trust", skill], fixture), 0, (o) => /trust|h5/i.test(o));
+    expectExit("mb.mjs checks", runMb(["checks", skill], fixture), 0, (o) => /checks|h5/i.test(o));
   }
 
   expectExit(

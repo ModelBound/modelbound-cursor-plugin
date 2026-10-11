@@ -14,4 +14,4 @@ node .modelbound/mb.mjs suggest --skill "<skill-file>"
 node .modelbound/mb.mjs pipeline run --skill "<skill-file>" --stage test_optimize --watch
 ```
 
-Use `/mb-pipeline-config` to adjust trust/latency/test gates before re-running.
+Use `/mb-pipeline-config` to adjust latency/test gates before re-running.
