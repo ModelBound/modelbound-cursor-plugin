@@ -46,7 +46,7 @@ if (!fs.existsSync(cursorCmd)) {
     "mb-health.md",
     "mb-init.md",
     "mb-new.md",
-    "mb-trust.md",
+    "mb-checks.md",
   ]) {
     if (!fs.existsSync(path.join(cursorCmd, name))) bad(`missing .cursor/commands/${name}`);
     else ok(`.cursor/commands/${name}`);

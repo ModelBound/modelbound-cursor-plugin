@@ -30,7 +30,7 @@ Requires Node ≥ 20. Auth via `MODELBOUND_API_KEY` env var or run `/mb-login` o
 | Command | What it does |
 |---|---|
 | `/mb-optimize <file\|slug>` | Token optimization. Append `--apply` to save a new version. |
-| `/mb-pipeline <skill>` | Full pipeline (lint → trust → test → benchmark → optimize). |
+| `/mb-pipeline <skill>` | Full pipeline (lint → checks → test → benchmark → optimize). |
 | `/mb-test <skill>` | Run the test suite. |
 | `/mb-benchmark <skill> <a> <b>` | Head-to-head benchmark. |
 | `/mb-versions <skill>` | List versions, newest first. |
@@ -38,7 +38,7 @@ Requires Node ≥ 20. Auth via `MODELBOUND_API_KEY` env var or run `/mb-login` o
 | `/mb-diff <skill> <from> [to]` | Unified diff between versions. |
 | `/mb-health` | Connectivity + auth check. |
 | `/mb-login` / `/mb-logout` / `/mb-whoami` | Auth shortcuts. |
-| `/mb-init`, `/mb-new`, `/mb-lint`, `/mb-validate`, `/mb-trust` | Local anti-slop scaffold + checks (see [docs/PARITY.md](docs/PARITY.md)). |
+| `/mb-init`, `/mb-new`, `/mb-lint`, `/mb-validate`, `/mb-checks` | Local anti-slop scaffold + checks (see [docs/PARITY.md](docs/PARITY.md)). |
 | `/mb-report`, `/mb-reliability`, `/mb-harness`, `/mb-trace` | Feedback loop, unattended gate, MCP run tracing. |
 
 Most commands shell out to the **modelbound** npm CLI via `.modelbound/mb.mjs`. See `.cursor/commands/` for the full list.

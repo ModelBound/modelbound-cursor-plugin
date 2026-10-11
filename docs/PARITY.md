@@ -1,6 +1,6 @@
 # CLI parity (modelbound vs Cursor plugin)
 
-Slash commands invoke `node .modelbound/mb.mjs …`, which runs the **[modelbound](https://www.npmjs.com/package/modelbound)** CLI (currently pinned to **0.3.6** when using npx).
+Slash commands invoke `node .modelbound/mb.mjs …`, which runs the **[modelbound](https://www.npmjs.com/package/modelbound)** CLI (currently pinned to **0.4.0** when using npx).
 
 ## Covered in Cursor (`/mb-*`)
 
@@ -11,10 +11,10 @@ Slash commands invoke `node .modelbound/mb.mjs …`, which runs the **[modelboun
 | Context / sync | `/mb-context`, `/mb-sync` |
 | Pipeline / test / eval | `/mb-pipeline`, `/mb-pipeline-config`, `/mb-test`, `/mb-test-optimize`, `/mb-eval` |
 | Optimize / versions | `/mb-optimize`, `/mb-versions`, `/mb-diff`, `/mb-restore`, `/mb-benchmark`, `/mb-compare` |
-| Trust & safety | `/mb-findings`, `/mb-suggest` |
+| Safety checks | `/mb-findings`, `/mb-suggest` |
 | Feedback loop | `/mb-report`, `/mb-reliability` |
 | Harness gate | `/mb-harness` → `mb harness` |
-| Local anti-slop | `/mb-init`, `/mb-new`, `/mb-trust`, `/mb-lint`, `/mb-validate` |
+| Local anti-slop | `/mb-init`, `/mb-new`, `/mb-checks`, `/mb-lint`, `/mb-validate` |
 | Run attribution | `/mb-trace` → MCP `report_run` (step summaries, not shell `mb trace`) |
 
 ## CLI-only (use terminal or add commands later)
@@ -29,4 +29,4 @@ Slash commands invoke `node .modelbound/mb.mjs …`, which runs the **[modelboun
 | `skills`, `skill` | Cloud library; partially covered by MCP in Cursor |
 | `mb trace` (shell) | Cursor uses MCP tracing via `/mb-trace`; CLI `trace` wraps arbitrary commands for CI |
 
-Install latest CLI: `npm install -g modelbound@0.3.6`
+Install latest CLI: `npm install -g modelbound@0.4.0`

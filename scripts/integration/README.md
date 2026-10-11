@@ -8,7 +8,7 @@ No Cursor IDE install required.
 | `npm run test:e2e` | Full E2E (offline + optional cloud) |
 | `npm run test:e2e:full` | `npm test` then E2E with `--skip-validate` |
 
-Cloud phases use `MODELBOUND_API_KEY` (env or `../modelbound-cli/.env`). CLI pin defaults to **modelbound@0.3.6**.
+Cloud phases use `MODELBOUND_API_KEY` (env or `../modelbound-cli/.env`). CLI pin defaults to **modelbound@0.4.0**.
 
 Legacy manual harness (extension fixture):
 

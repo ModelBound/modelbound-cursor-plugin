@@ -1,5 +1,5 @@
 ---
-description: Authoring standards for Agent Skills so they score well in Skill Health Lens and Trust & Safety
+description: Authoring standards for Agent Skills so they pass Skill Health Lens and ModelBound's safety checks
 alwaysApply: false
 globs:
   - "**/SKILL.md"
