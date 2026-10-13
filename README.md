@@ -2,6 +2,16 @@
 
 Drop the ModelBound token-optimization and Skill Development Pipeline workflow into Cursor. Ships as a set of `.cursor/commands/*.md` slash commands (Cursor surfaces these in chat) plus a tiny pre-write Git hook that snapshots skill files before Cursor's agent rewrites them.
 
+## Start here
+
+| Command | What it does |
+|---|---|
+| `/mb-flight-check [path]` | Flight Check: offline safety scan (prompt injection, secrets, risky commands, loop traps). No account needed. |
+| `/mb-login` | Connect to ModelBound so runs show up in Live Runs and skills sync. |
+| `/mb-pipeline <skill>` | Full check before publishing: safety, tests, latency. |
+
+Measure how much a skill actually helps with a blind with/without A/B run at https://modelbound.co/flight-check.
+
 ## Install
 
 Two equivalent ways:
