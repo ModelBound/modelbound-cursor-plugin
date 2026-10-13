@@ -1,7 +1,7 @@
 {
   "name": "modelbound-skill-health-lens",
   "displayName": "ModelBound Skill Health Lens",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Audit Agent Skills for safety issues, token budget, duplicates, and tool-surface risk. Run the Skill Development Pipeline and manage versions without leaving Cursor.",
   "author": {
     "name": "ModelBound",
@@ -24,7 +24,7 @@
     "model-context-protocol",
     "skill-pipeline",
     "token-optimization",
-    "trust",
+    "flight-check",
     "ai-agents",
     "vscode"
   ],
