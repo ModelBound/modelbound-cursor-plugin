@@ -1,7 +1,7 @@
 {
   "name": "modelbound-cursor-plugin",
-  "version": "0.5.0",
-  "description": "Official ModelBound plugin for Cursor — slash commands for skill pipeline, safety checks, versions, and MCP-backed context sync.",
+  "version": "0.6.0",
+  "description": "Official ModelBound plugin for Cursor \u2014 slash commands for skill pipeline, safety checks, versions, and MCP-backed context sync.",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -37,7 +37,9 @@
     "test:e2e:full": "npm test && node scripts/integration/run-plugin-e2e.mjs --skip-validate",
     "prepublishOnly": "node -e \"require('fs').accessSync('.cursor-plugin/plugin.json')\""
   },
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "files": [
     ".cursor",
     ".cursor-plugin",
